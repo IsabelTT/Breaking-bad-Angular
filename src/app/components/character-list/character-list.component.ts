@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Character } from 'src/app/interfaces/character.interface';
+import { CharacterService } from 'src/app/services/character.service';
 
 @Component({
   selector: 'app-character-list',
@@ -8,11 +9,15 @@ import { Character } from 'src/app/interfaces/character.interface';
 })
 export class CharacterListComponent implements OnInit {
   arrCharacter: Character[];
-  constructor() {
+  constructor(
+    private characterService: CharacterService,
+  ) {
     this.arrCharacter = new Array();
   }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
+    const allcharacters = await this.characterService.getAll();
+
   }
 
 }
